@@ -1,20 +1,21 @@
-import { REST, Routes } from 'discord.js';
-import fs from 'fs';
-import path from 'path';
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const fs = require('fs');
+const path = require('path');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 const dotenv = require('dotenv');
 
-dotenv.config(); // don't touch
-const { TOKEN, CLIENT_ID }: any = process.env;
+dotenv.config();
+
+const { TOKEN, CLIENT_ID } = process.env;
 
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter((file: string) => file.endsWith('.ts'));
+const commandFiles = fs.readdirSync(commandsPath).filter((file: any) => file.endsWith('.ts'));
 
-const commands: any[] = [];
-
-for (const file of commandFiles) {
+const commands = commandFiles.map((file: any) => {
     const command = require(`./commands/${file}`);
-    commands.push(command.data.toJSON());
-}
+    return command.data.toJSON();
+});
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
@@ -22,7 +23,7 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
     try {
         console.log(`Resetting ${commands.length} commands globally.`);
         
-        const data = await rest.put(
+        await rest.put(
             Routes.applicationCommands(CLIENT_ID),
             { body: commands }
         );
