@@ -31,8 +31,8 @@ module.exports = {
                 messages: [{ content: question, role: 'user' }],
             });
 
-            console.log('API response:', response.data);
-            console.log(typeof(response.data));
+            // console.log('API response:', response.data);
+            // console.log(typeof(response.data));
 
             const embed = new EmbedBuilder()
                 .setColor('#563AF5')
