@@ -1,5 +1,5 @@
 // const { Client, Collection, Events } = require('discord.js');
-import { Client, Collection, GatewayIntentBits, Events } from 'discord.js';
+import { Client, Collection, GatewayIntentBits, Events, IntentsBitField } from 'discord.js';
 import 'dotenv/config';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -20,7 +20,7 @@ class MyClient extends Client implements CustomClient {
   
   constructor() {
     super({
-      intents: [],
+      intents: [GatewayIntentBits.Guilds, IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers],
     });
     this.commands = new Collection();
   }
