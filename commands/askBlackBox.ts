@@ -11,7 +11,6 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction: any) {
         const question = interaction.options.getString('question');
-
         await interaction.deferReply();
 
         try {
