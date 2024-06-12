@@ -11,13 +11,13 @@ module.exports = {
                 .setDescription('Insira sua pergunta')
                 .setRequired(true)),
     async execute(interaction: any) {
-        const question = interaction.options.getString('question');
+        const question = interaction.options.getString('question'); 
         
         await interaction.deferReply();
         
         try {
             const gemini = new GoogleGenerativeAI(process.env.GEMINI_TOKEN);
-            const model = gemini.getGenerativeModel({ model: "gemini-1.5-flash"});
+            const model = gemini.getGenerativeModel({ model: "gemini-1.5-flash" });
             const prompt = question;
 
             const result = await model.generateContent(prompt);

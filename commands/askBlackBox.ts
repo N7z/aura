@@ -11,11 +11,12 @@ module.exports = {
                 .setRequired(true)),
     async execute(interaction: any) {
         const question = interaction.options.getString('question');
+
         await interaction.deferReply();
 
         try {
             const response = await axios.post('https://www.blackbox.ai/api/chat', {
-                id: 'pgK5Du2', 
+                id: 'pgK5Du2',
                 previewToken: null,
                 userId: 'a369da6d-f18c-4c69-b99b-6a59c41466f1',
                 codeModelMode: true,
