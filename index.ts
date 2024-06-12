@@ -16,12 +16,20 @@ interface CustomClient extends Client {
 // Estender a classe Client
 class MyClient extends Client implements CustomClient {
   commands: Collection<string, any>;
+  events: Collection<string, any>;
   
   constructor() {
     super({
-      intents: [GatewayIntentBits.Guilds, IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers],
+      intents: [
+        GatewayIntentBits.Guilds, 
+        IntentsBitField.Flags.Guilds, 
+        IntentsBitField.Flags.GuildMessages, 
+        IntentsBitField.Flags.GuildMembers,
+        IntentsBitField.Flags.GuildVoiceStates,
+      ],
     });
     this.commands = new Collection();
+    this.events = new Collection();
   }
 
   // Implementação dos métodos da interface CustomClient
@@ -38,6 +46,7 @@ class MyClient extends Client implements CustomClient {
   }
 }
 
+// criando novo client
 const client = new MyClient();
 
 const commandsPath = path.join(__dirname, "commands");
@@ -50,6 +59,19 @@ for (const file of commandFiles) {
         client.commands.set(command.data.name, command);
     } else {
         console.log(`Command in ${filePath} doesn't have "data" or "execute".`);
+    }
+}
+
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.endsWith('.ts'));
+
+for (const file of eventFiles) {
+    const filePath = path.join(eventsPath, file);
+    const event = require(filePath);
+    if (event.name && event.execute) {
+        client.on(event.name, event.execute);
+    } else {
+        console.log(`Event in ${filePath} doesn't have "name" or "execute".`);
     }
 }
 
@@ -73,4 +95,3 @@ client.on(Events.InteractionCreate, async (interaction: any) => {
         await interaction.reply('Got an error.');
     }
 });
-
