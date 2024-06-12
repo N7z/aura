@@ -1,4 +1,3 @@
-// const { Client, Collection, Events } = require('discord.js');
 import { Client, Collection, GatewayIntentBits, Events, IntentsBitField } from 'discord.js';
 import 'dotenv/config';
 import * as fs from 'fs';
