@@ -4,7 +4,7 @@ const axios = require('axios');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('askblackbox')
-        .setDescription('Integração com a blackbox')
+        .setDescription('Integração com a blackbox.')
         .addStringOption((option: any) => 
             option.setName('question')
                 .setDescription('Insira sua pergunta')

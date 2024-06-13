@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('profile-scrapper')
-        .setDescription('Recive a member and replies his profile picture')
+        .setDescription('Pega a foto de perfil de um membro.')
         .addUserOption((option:any) =>
             option.setName('membro')
                 .setDescription('Mencione o membro, exemplo: @membro')

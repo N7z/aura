@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('askgemini')
-        .setDescription('Integração com a Gemini')
+        .setDescription('Integração com a Gemini.')
         .addStringOption((option: any) => 
             option.setName('question')
                 .setDescription('Insira sua pergunta')

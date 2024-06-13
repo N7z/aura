@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('repo-info')
-        .setDescription('Provides information about the repository.'),
+        .setDescription('Mostra informações do repositório do bot.'),
     async execute(interaction: any) {
         try {
             await interaction.deferReply();
