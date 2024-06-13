@@ -14,7 +14,7 @@ const commandFiles = fs.readdirSync(commandsPath).filter((file: any) => file.end
 
 const commands = commandFiles.map((file: any) => {
     const command = require(`./commands/${file}`);
-    return command.data.toJSON();
+    return command.data;
 });
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
