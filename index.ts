@@ -49,6 +49,8 @@ class MyClient extends Client implements CustomClient {
 // criando novo client
 const client = new MyClient();
 
+
+//chamando comandos 
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs.readdirSync(commandsPath).filter((file: string) => file.endsWith('.ts'));
 
@@ -62,6 +64,8 @@ for (const file of commandFiles) {
     }
 }
 
+
+// chamando eventos
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.endsWith('.ts'));
 
