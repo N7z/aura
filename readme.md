@@ -29,8 +29,6 @@ First test all the alterations you want to make with a personal token bot of you
 
 ### Commands:
 
-- `mute`
-- `unmute`
 - `warn`
 - `lock`
 - `unlock`
