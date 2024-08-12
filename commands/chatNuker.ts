@@ -21,8 +21,6 @@ module.exports = {
         await channel.delete('Nuked the channel');
         await newChannel.setPosition(channelPosition);
         await newChannel.send('Este canal foi nukado!');
-
-        await interaction.reply('O canal foi nukado com sucesso!');
     } catch (error) {
             console.error('Erro ao nukar o canal:', error);
             await interaction.reply('Ocorreu um erro ao tentar nukar o canal.');
