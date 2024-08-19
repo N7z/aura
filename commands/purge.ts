@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,7 +10,7 @@ module.exports = {
                 .setRequired(true)),
         async execute(interaction:any) {
 
-            if(!interaction.memberPermissions?.has('MANAGE_MESSAGES')) {
+            if(!interaction.member.permissions.has(PermissionFlagsBits.ManageMessages)) {
                 return interaction.reply({ content: 'Você não tem permissão para usar este comando.', ephemeral: true });
             }
 
