@@ -9,6 +9,11 @@ module.exports = {
                 .setDescription('Número de mensagens, exemplo: 100')
                 .setRequired(true)),
         async execute(interaction:any) {
+
+            if(!interaction.memberPermissions?.has('MANAGE_MESSAGES')) {
+                return interaction.reply({ content: 'Você não tem permissão para usar este comando.', ephemeral: true });
+            }
+
             const channel = interaction.channel;
             const amount = interaction.options.getInteger('number');
             
