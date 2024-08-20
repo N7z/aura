@@ -16,7 +16,7 @@ module.exports = {
             const avatarURL = user.displayAvatarURL({ dynamic: true });
 
             const embed = new EmbedBuilder()
-                .setColor('563AF5')
+                .setColor('#563AF5')
                 .setTitle('Foto de Perfil')
                 .setDescription(`Aqui está a foto de perfil de ${user.tag}:`)
                 .setImage(avatarURL);
