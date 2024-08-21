@@ -21,10 +21,7 @@ First test all the alterations you want to make with a personal token bot of you
 ### Events:
 
 - `guildMemberUpdate`
-- `messageDelete`
 - `messageUpdate`
-- `guildBanAdd`
-- `guildBanRemove`
 - `Anti-raid`
 
 ### Commands:
