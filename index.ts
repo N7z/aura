@@ -30,7 +30,6 @@ class MyClient extends Client implements CustomClient {
         IntentsBitField.Flags.MessageContent,
         IntentsBitField.Flags.GuildModeration,
         IntentsBitField.Flags.GuildMembers,
-
       ],
     });
     this.commands = new Collection();
