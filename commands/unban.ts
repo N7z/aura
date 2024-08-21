@@ -52,7 +52,6 @@ module.exports = {
         .setTimestamp();
 
       await logChannel.send({ embeds: [embed] });
-      console.log(`Desbanimento registrado no canal de log: ${ban.user.tag}`);
     } catch (error) {
       console.error('Erro ao desbanir usuário:', error);
       return interaction.reply({ content: 'Houve um erro ao tentar desbanir este usuário.', ephemeral: true });

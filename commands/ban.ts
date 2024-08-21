@@ -60,7 +60,6 @@ module.exports = {
         .setTimestamp();
 
       await logChannel.send({ embeds: [embed] });
-      console.log(`Banimento registrado no canal de log: ${user.tag}`);
     } catch (error) {
       console.error('Erro ao banir usuário:', error);
       return interaction.reply({ content: 'Houve um erro ao tentar banir este usuário.', ephemeral: true });

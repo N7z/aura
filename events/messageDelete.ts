@@ -42,7 +42,6 @@ module.exports = {
 
         try {
             await logChannel.send({ embeds: [embed] });
-            console.log(`Mensagem deletada registrada no canal de log.`);
         } catch (e) {
             console.error('Erro ao enviar a embed no canal de log:', e);
         }
