@@ -26,9 +26,7 @@ First test all the alterations you want to make with a personal token bot of you
 
 ### Commands:
 
-- `warn`
-- `lock`
-- `unlock`
+
 
 The to-do list will be updated as new features are requested.
 
