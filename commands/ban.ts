@@ -1,4 +1,4 @@
-import { CacheType, CommandInteraction, CommandInteractionOptionResolver, SlashCommandBuilder } from 'discord.js';
+import { CacheType, CommandInteraction, CommandInteractionOptionResolver, SlashCommandBuilder, TextChannel, EmbedBuilder } from 'discord.js';
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -37,7 +37,30 @@ module.exports = {
 
     try {
       await member.ban({ reason });
-      return interaction.reply({ content: `${user.tag} foi banido. Razão: ${reason}` });
+      await interaction.reply({ content: `${user.tag} foi banido. Razão: ${reason}` });
+
+      const logChannelId = '1275323099482423360';
+      const logChannel = interaction.guild?.channels.cache.get(logChannelId) as TextChannel;
+
+      if (!logChannel) {
+        console.error('Canal de log não encontrado');
+        return;
+      }
+
+      const embed = new EmbedBuilder()
+        .setTitle('Usuário Banido')
+        .setColor('Red')
+        .setThumbnail(user.displayAvatarURL())
+        .addFields([
+          { name: 'Usuário Banido', value: `${user.tag} (${user.id})`, inline: false },
+          { name: 'Servidor', value: interaction.guild?.name || 'Servidor Desconhecido', inline: false },
+          { name: 'Autor do Banimento', value: `${interaction.user.tag} (${interaction.user.id})`, inline: false },
+          { name: 'Motivo', value: reason, inline: false },
+        ])
+        .setTimestamp();
+
+      await logChannel.send({ embeds: [embed] });
+      console.log(`Banimento registrado no canal de log: ${user.tag}`);
     } catch (error) {
       console.error('Erro ao banir usuário:', error);
       return interaction.reply({ content: 'Houve um erro ao tentar banir este usuário.', ephemeral: true });
