@@ -26,6 +26,11 @@ class MyClient extends Client implements CustomClient {
         IntentsBitField.Flags.GuildMessages, 
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildVoiceStates,
+        IntentsBitField.Flags.GuildMessageReactions,
+        IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildModeration,
+        IntentsBitField.Flags.GuildMembers,
+
       ],
     });
     this.commands = new Collection();
