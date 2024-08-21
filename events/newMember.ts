@@ -1,5 +1,6 @@
 import { Events, GuildMember } from "discord.js";
 import config from "../config.json";
+
 module.exports = {
     name: Events.GuildMemberAdd,
     async execute(member: GuildMember) {
