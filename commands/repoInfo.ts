@@ -9,16 +9,38 @@ module.exports = {
     async execute(interaction: any) {
         try {
             await interaction.deferReply();
-			console.log("cheguei aqui!")
-            const commitsResponse = await axios.get(`https://api.github.com/repos/${process.env.OWNER}/${process.env.REPO}/commits`, {
-                headers: {
-                    'Authorization': `token ${process.env.GITHUB_TOKEN}`
+
+            const perPage = 100;
+            let page = 1;
+            let totalCommits = 0;
+            let lastCommitDate = '';
+            let lastCommitAuthor = '';
+            let firstIteration = true;
+
+            while (true) {
+                const commitsResponse = await axios.get(`https://api.github.com/repos/${process.env.OWNER}/${process.env.REPO}/commits`, {
+                    headers: {
+                        'Authorization': `token ${process.env.GITHUB_TOKEN}`
+                    },
+                    params: {
+                        per_page: perPage,
+                        page: page,
+                    }
+                });
+
+                const commits = commitsResponse.data;
+
+                if (commits.length === 0) break;
+
+                if (firstIteration && commits.length > 0) {
+                    lastCommitDate = commits[0].commit.author.date;
+                    lastCommitAuthor = commits[0].commit.author.name;
+                    firstIteration = false;
                 }
-            });
-            const totalCommits = commitsResponse.data.length;
-            const lastCommit = commitsResponse.data[0];
-            const lastCommitDate = lastCommit.commit.author.date;
-            const lastCommitAuthor = lastCommit.commit.author.name;
+
+                totalCommits += commits.length;
+                page++;
+            }
 
             const ownerResponse = await axios.get(`https://api.github.com/users/${process.env.OWNER}`, {
                 headers: {
@@ -43,7 +65,6 @@ module.exports = {
             await interaction.editReply({ embeds: [embed] });
         } catch (error) {
             console.error('Erro ao obter informações do repositório:', error);
-
             await interaction.editReply({ content: 'Ocorreu um erro ao obter informações do repositório.', ephemeral: true });
         }
     },
