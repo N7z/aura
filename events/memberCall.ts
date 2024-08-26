@@ -19,7 +19,6 @@ module.exports = {
     const zonedDate = toDate(now, { timeZone });
     const formattedTime = format(zonedDate, 'HH:mm:ss');
 
-    // Usuário entrou em um canal de voz
     if (!oldState.channel && newState.channel) {
       const member = newState.member;
       const channel = newState.channel;
@@ -44,7 +43,6 @@ module.exports = {
       }
     }
 
-    // Usuário saiu de um canal de voz
     if (oldState.channel && !newState.channel) {
       const member = oldState.member;
       const channel = oldState.channel;
@@ -69,7 +67,6 @@ module.exports = {
       }
     }
 
-    // Usuário trocou de canal de voz
     if (oldState.channel && newState.channel && oldState.channel.id !== newState.channel.id) {
       const member = newState.member;
       const oldChannel = oldState.channel;
