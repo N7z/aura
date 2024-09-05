@@ -49,13 +49,19 @@ module.exports = {
             });
             const ownerProfile = ownerResponse.data;
 
+            // Format last commit date
+            const lastCommitDateObj = new Date(lastCommitDate);
+            const formattedDate = lastCommitDateObj.toLocaleDateString('pt-BR') +
+                ' - ' +
+                lastCommitDateObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
             const embed = new EmbedBuilder()
                 .setColor(0x0099ff)
                 .setTitle(`Informações do Repositório: ${process.env.REPO}`)
                 .setThumbnail(interaction.client.user.displayAvatarURL())
                 .addFields(
                     { name: 'Total de Commits', value: `${totalCommits}`, inline: true },
-                    { name: 'Última Commit', value: `${lastCommitDate}`, inline: true },
+                    { name: 'Última Commit', value: `${formattedDate}`, inline: true },
                     { name: 'Autor da Última Commit', value: `${lastCommitAuthor}`, inline: true },
                     { name: 'Proprietário do Repositório', value: `${ownerProfile.login}`, inline: true }
                 )
