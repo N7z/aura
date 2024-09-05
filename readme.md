@@ -20,13 +20,11 @@ First test all the alterations you want to make with a personal token bot of you
 
 ### Events:
 
-- `guildMemberUpdate`
-- `messageUpdate`
 - `Anti-raid`
 
 ### Commands:
 
-
+- `bot config panel`
 
 The to-do list will be updated as new features are requested.
 
